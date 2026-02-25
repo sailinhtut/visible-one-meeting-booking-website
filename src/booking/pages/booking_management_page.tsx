@@ -267,7 +267,7 @@ export default function BookingManagementPage() {
 														) as HTMLDialogElement
 													)?.showModal();
 												}}
-												className='hover:underline font-medium'>
+												className='text-start hover:underline font-medium'>
 												{b.name}
 											</button>
 										</td>
