@@ -82,6 +82,12 @@ export default function BookingManagementPage() {
 	useEffect(() => {
 		fetchBookings();
 		fetchProfile();
+
+		const interval = setInterval(() => {
+			setBookings((prev) => [...prev]); // force re-render
+		}, 30000); // 30 seconds
+
+		return () => clearInterval(interval);
 	}, []);
 
 	const handleCreate = async () => {
@@ -169,6 +175,14 @@ export default function BookingManagementPage() {
 		}
 	};
 
+	const isLiveNow = (booking: Booking) => {
+		const now = dayjs();
+		const start = dayjs.utc(booking.startTime).local();
+		const end = dayjs.utc(booking.endTime).local();
+
+		return now.isAfter(start) && now.isBefore(end);
+	};
+
 	return (
 		<div className='p-5'>
 			<div className='space-y-6'>
@@ -241,28 +255,36 @@ export default function BookingManagementPage() {
 						{/* Total Users */}
 						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
 							<div className='stat-title'>Total Users</div>
-							<div className='stat-value text-lg font-semibold'>{totalUsers}</div>
+							<div className='stat-value text-lg font-semibold'>
+								{totalUsers}
+							</div>
 							<div className='stat-desc'>Unique booking users</div>
 						</div>
 
 						{/* Total Bookings */}
 						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
 							<div className='stat-title'>Total Bookings</div>
-							<div className='stat-value text-lg font-semibold'>{totalBookings}</div>
+							<div className='stat-value text-lg font-semibold'>
+								{totalBookings}
+							</div>
 							<div className='stat-desc'>All created bookings</div>
 						</div>
 
 						{/* Total Pending */}
 						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
 							<div className='stat-title'>Total Pending</div>
-							<div className='stat-value text-lg font-semibold'>{totalPending}</div>
+							<div className='stat-value text-lg font-semibold'>
+								{totalPending}
+							</div>
 							<div className='stat-desc'>Awaiting action</div>
 						</div>
 
 						{/* Total Completed */}
 						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
 							<div className='stat-title'>Total Completed</div>
-							<div className='stat-value text-lg font-semibold'>{totalCompleted}</div>
+							<div className='stat-value text-lg font-semibold'>
+								{totalCompleted}
+							</div>
 							<div className='stat-desc'>Finished bookings</div>
 						</div>
 					</div>
@@ -313,7 +335,14 @@ export default function BookingManagementPage() {
 										</td>
 										<td>{b.userId.name}</td>
 										<td>
-											<div className='flex items-center gap-3 text-sm'>
+											<div className='flex items-center gap-3 text-sm relative'>
+												{isLiveNow(b) && (
+													<span className='absolute -left-4 flex h-3 w-3 top-0'>
+														<span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75'></span>
+														<span className='relative inline-flex rounded-full h-3 w-3 bg-success'></span>
+													</span>
+												)}
+
 												<div className='flex flex-col'>
 													<span className='font-semibold'>
 														{dayjs(b.startTime).format(
