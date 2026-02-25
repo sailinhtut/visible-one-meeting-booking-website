@@ -51,7 +51,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: (
 			<Navigate
-				to={auth_service.isAuthenticated() ? '/dashboard/profile' : '/login'}
+				to={auth_service.isAuthenticated() ? '/dashboard/bookings' : '/login'}
 				replace
 			/>
 		),
