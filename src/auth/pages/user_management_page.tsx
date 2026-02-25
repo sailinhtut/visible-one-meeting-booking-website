@@ -141,7 +141,7 @@ export default function UserManagementPage() {
 														) as HTMLDialogElement
 													)?.showModal();
 												}}
-												className='hover:underline font-medium'>
+												className='text-start hover:underline font-medium'>
 												{u.name}
 											</button>
 										</td>
