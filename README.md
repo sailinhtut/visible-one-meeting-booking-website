@@ -147,15 +147,7 @@ The frontend is designed for deployment on:
 For SPA routing on Vercel, a vercel.json rewrite rule is required to redirect all routes to
 index.html.
 
----
-
-## Environment Configuration
-
-Example .env file:
-
-VITE_API_URL=http://localhost:3000/api/v1
-
----
+--
 
 ## Production Build
 
