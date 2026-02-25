@@ -1,0 +1,15 @@
+How to deploy this frontend 
+
+Step 1: Create vercel account. 
+Step 2: Connect with your github account.
+Step 3: Clone or upload this project into new repositary.
+Step 4: Goto Vercel Dashboard (After Logged In and Connected with Github Acc)
+Step 5: Click Create Project
+Step 6: Select this frontend repositary above in step 3.
+Step 7: Once project is created, goto Project Detail Page.
+Step 8: Goto Setting Tab, then goto Build and Deployement Setting.
+Step 9: Goto Framework Setting and choose Vite in Framework Preset selector.
+Step 10: Replace backend api url in src\common\configs\api_config.ts.
+Step 15: After configurting everything, try to push new commit to git repository. Then vercel will detect new commit and trigger deployment itself. You can see deployment log in Project Detail Page / Deployments Tab. 
+
+
