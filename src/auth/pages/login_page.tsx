@@ -26,7 +26,7 @@ export default function LoginPage() {
 		try {
 			await authService.login(email, password);
 			Toast.show('Logged In Successfully', { type: 'success' });
-			navigate('/dashboard/profile');
+			navigate('/dashboard/bookings');
 		} catch (err: any) {
 			console.log(err);
 			setError(err || 'Login failed');
