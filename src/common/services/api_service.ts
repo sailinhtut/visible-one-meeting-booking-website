@@ -47,9 +47,10 @@ class APIGateWay {
 
 					if (error.response.status === 401) {
 						localStorage.removeItem('access_token');
-						// Toast.show('Session Expired. Please log in again.', {
-						// 	type: 'error',
-						// });
+
+						Toast.show('Session Expired. Please log in again.', {
+							type: 'error',
+						});
 					}
 
 					return Promise.reject(message);

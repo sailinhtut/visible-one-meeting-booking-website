@@ -47,6 +47,14 @@ export default function BookingManagementPage() {
 		return false;
 	};
 
+	const totalBookings = filteredBookings.length;
+
+	const totalPending = filteredBookings.filter((b) => b.status === 'pending').length;
+
+	const totalCompleted = filteredBookings.filter((b) => b.status === 'completed').length;
+
+	const totalUsers = new Set(filteredBookings.map((b) => b.userId?.id)).size;
+
 	const fetchBookings = async () => {
 		try {
 			setLoading(true);
@@ -227,6 +235,38 @@ export default function BookingManagementPage() {
 						</div>
 					</div>
 				</div>
+
+				{user && user.role !== 'user' && (
+					<div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+						{/* Total Users */}
+						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
+							<div className='stat-title'>Total Users</div>
+							<div className='stat-value text-lg font-semibold'>{totalUsers}</div>
+							<div className='stat-desc'>Unique booking users</div>
+						</div>
+
+						{/* Total Bookings */}
+						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
+							<div className='stat-title'>Total Bookings</div>
+							<div className='stat-value text-lg font-semibold'>{totalBookings}</div>
+							<div className='stat-desc'>All created bookings</div>
+						</div>
+
+						{/* Total Pending */}
+						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
+							<div className='stat-title'>Total Pending</div>
+							<div className='stat-value text-lg font-semibold'>{totalPending}</div>
+							<div className='stat-desc'>Awaiting action</div>
+						</div>
+
+						{/* Total Completed */}
+						<div className='stat bg-base-100 shadow rounded-box border border-base-200 overflow-auto'>
+							<div className='stat-title'>Total Completed</div>
+							<div className='stat-value text-lg font-semibold'>{totalCompleted}</div>
+							<div className='stat-desc'>Finished bookings</div>
+						</div>
+					</div>
+				)}
 
 				{loading && (
 					<div className='flex justify-center py-10'>
